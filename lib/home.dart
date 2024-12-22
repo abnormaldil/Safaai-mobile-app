@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,43 +30,43 @@ class _HomePageState extends State<HomePage> {
   Timer? _debounce;
 
   // Marker details map
-  final Map<String, Map<String, dynamic>> _markerDetails = {
-    "SaFi-1": {
-      "title": "SaFi Bin 1",
-      "location": "CSE BLOCK RIT",
-      "description": "60% Filled",
-      "coordinates": LatLng(9.579483847276773, 76.62201380100855),
-    },
-    "SaFi-2": {
-      "title": "SaFi Bin 2",
-      "location": "MECH BLOCK RIT",
-      "description": "80% Filled",
-      "coordinates": LatLng(9.579802075667732, 76.62361088852967),
-    },
-    "SaFi-3": {
-      "title": "SaFi Bin 3",
-      "location": "EEE BLOCK RIT",
-      "description": "50% Filled",
-      "coordinates": LatLng(9.57992642403981, 76.62405676678246),
-    },
-    "SaFi-4": {
-      "title": "SaFi Bin 4",
-      "location": "EC BLOCK RIT",
-      "description": "40% Filled",
-      "coordinates": LatLng(9.57918255364003, 76.62417836994817),
-    },
-    "SaFi-5": {
-      "title": "SaFi Bin 5",
-      "location": "CIVIL BLOCK RIT",
-      "description": "60% Filled",
-      "coordinates": LatLng(9.577842048559074, 76.62287861768607),
-    },
-    "SaFi-6": {
-      "title": "SaFi Bin 6",
-      "location": "B-ARCH BLOCK RIT",
-      "description": "70% Filled",
-      "coordinates": LatLng(9.578541832056205, 76.62271873431126),
-    },
+  Map<String, Map<String, dynamic>> _markerDetails = {
+    // "SaFi-1": {
+    //   "title": "SaFi Bin 1",
+    //   "location": "CSE BLOCK RIT",
+    //   "description": 60,
+    //   "coordinates": LatLng(9.579483847276773, 76.62201380100855),
+    // },
+    // "SaFi-2": {
+    //   "title": "SaFi Bin 2",
+    //   "location": "MECH BLOCK RIT",
+    //   "description": 80,
+    //   "coordinates": LatLng(9.579802075667732, 76.62361088852967),
+    // },
+    // "SaFi-3": {
+    //   "title": "SaFi Bin 3",
+    //   "location": "EEE BLOCK RIT",
+    //   "description": 50,
+    //   "coordinates": LatLng(9.57992642403981, 76.62405676678246),
+    // },
+    // "SaFi-4": {
+    //   "title": "SaFi Bin 4",
+    //   "location": "EC BLOCK RIT",
+    //   "description": 40,
+    //   "coordinates": LatLng(9.57918255364003, 76.62417836994817),
+    // },
+    // "SaFi-5": {
+    //   "title": "SaFi Bin 5",
+    //   "location": "CIVIL BLOCK RIT",
+    //   "description": 60,
+    //   "coordinates": LatLng(9.577842048559074, 76.62287861768607),
+    // },
+    // "SaFi-6": {
+    //   "title": "SaFi Bin 6",
+    //   "location": "B-ARCH BLOCK RIT",
+    //   "description": 70,
+    //   "coordinates": LatLng(9.578541832056205, 76.62271873431126),
+    // },
   };
 
   String? _selectedMarkerId;
@@ -76,6 +77,7 @@ class _HomePageState extends State<HomePage> {
     customMarker();
     super.initState();
     _getUserLocation();
+    _fetchBinDetails();
   }
 
   void customMarker() {
@@ -140,6 +142,63 @@ class _HomePageState extends State<HomePage> {
       mapController.animateCamera(
         CameraUpdate.newLatLngZoom(_initialPosition, 14),
       );
+    }
+  }
+
+  Future<void> _fetchBinDetails() async {
+    try {
+      QuerySnapshot querySnapshot = await _firestore.collection('bin').get();
+
+      Map<String, Map<String, dynamic>> fetchedBinDetails = {};
+
+      for (var doc in querySnapshot.docs) {
+        var binData = doc.data() as Map<String, dynamic>;
+        var markerId = doc.id; // bin1, bin2, etc.
+        GeoPoint geoPoint = binData["coordinates"];
+        fetchedBinDetails[markerId] = {
+          "title": binData["title"] ?? "Unknown Bin",
+          "location": binData["location"] ?? "Unknown Location",
+          "description": binData["description"] ?? 0,
+          "coordinates": LatLng(
+            geoPoint.latitude,
+            geoPoint.longitude,
+          ),
+        };
+      }
+      print(fetchedBinDetails);
+      setState(() {
+        _markerDetails = fetchedBinDetails; // Update the markers dynamically
+      });
+    } catch (e) {
+      print("Error fetching bin details: $e");
+    }
+  }
+
+  Future<void> _reloadBinData() async {
+    if (_selectedMarkerId != null) {
+      try {
+        // Fetch the latest bin details from Firestore for the selected bin
+        DocumentSnapshot docSnapshot =
+            await _firestore.collection('bin').doc(_selectedMarkerId).get();
+
+        if (docSnapshot.exists) {
+          var binData = docSnapshot.data() as Map<String, dynamic>;
+          GeoPoint geoPoint = binData["coordinates"];
+          setState(() {
+            _markerDetails[_selectedMarkerId!] = {
+              "title": binData["title"] ?? "Unknown Bin",
+              "location": binData["location"] ?? "Unknown Location",
+              "description": binData["description"] ?? 0,
+              "coordinates": LatLng(
+                geoPoint.latitude,
+                geoPoint.longitude,
+              ),
+            };
+          });
+        }
+      } catch (e) {
+        print("Error reloading bin data: $e");
+      }
     }
   }
 
@@ -314,14 +373,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Positioned(
-            top: 10,
-            left: 15,
-            right: 15,
+            top: 5,
+            left: 10,
+            right: 10,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(30),
                 border: Border.all(
                     color: const Color.fromARGB(255, 185, 182, 182), width: 1),
               ),
@@ -399,143 +458,186 @@ class _HomePageState extends State<HomePage> {
             ),
           if (_selectedMarkerId != null)
             Positioned(
-              bottom: 100,
-              left: 20,
-              right: 20,
+              bottom: 90,
+              left: 150,
+              right: 10,
+              top: 450,
               child: Card(
+                color: Color.fromARGB(255, 38, 38, 38),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(100),
                 ),
-                elevation: 5,
+                elevation: 10,
                 child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Row(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Left side content (Icons + Texts)
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_right,
-                                  color: const Color.fromARGB(255, 36, 36, 36),
+                      // Top: Radial Gauge
+                      Center(
+                        child: SizedBox(
+                          height: 120, // Adjust the gauge height
+                          child: SfRadialGauge(
+                            axes: <RadialAxis>[
+                              RadialAxis(
+                                minimum: 0,
+                                maximum: 100,
+                                showLabels: false,
+                                showTicks: false,
+                                axisLineStyle: AxisLineStyle(
+                                  thickness: 0.3,
+                                  cornerStyle: CornerStyle.bothCurve,
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  thicknessUnit: GaugeSizeUnit.factor,
                                 ),
-                                SizedBox(width: 10),
-                                Expanded(
-                                  child: Text(
-                                    _markerDetails[_selectedMarkerId]![
-                                        "title"]!,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color:
-                                          const Color.fromARGB(255, 36, 36, 36),
+                                pointers: <GaugePointer>[
+                                  RangePointer(
+                                    value: _markerDetails[_selectedMarkerId]![
+                                            'description']
+                                        .toDouble(),
+                                    cornerStyle: CornerStyle.bothCurve,
+                                    width: 0.3,
+                                    sizeUnit: GaugeSizeUnit.factor,
+                                    gradient: SweepGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 23, 137, 91),
+                                        Color.fromARGB(255, 32, 195, 130),
+                                        Color.fromARGB(255, 24, 249, 159),
+                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Icon(Icons.percent,
-                                    color:
-                                        const Color.fromARGB(255, 36, 36, 36),
-                                    size: 20),
-                                SizedBox(width: 10),
-                                Expanded(
-                                  child: Text(
-                                    _markerDetails[_selectedMarkerId]![
-                                        "description"]!,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color:
-                                          const Color.fromARGB(255, 36, 36, 36),
+                                ],
+                                annotations: <GaugeAnnotation>[
+                                  GaugeAnnotation(
+                                    positionFactor: 0.1,
+                                    angle: 90,
+                                    widget: Text(
+                                      "${_markerDetails[_selectedMarkerId]!['description']}%",
+                                      style: TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Gilroy',
+                                        color:
+                                            Color.fromARGB(255, 42, 254, 169),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Icon(Icons.location_on,
-                                    color:
-                                        const Color.fromARGB(255, 36, 36, 36),
-                                    size: 20),
-                                SizedBox(width: 10),
-                                Expanded(
-                                  child: Text(
-                                    _markerDetails[_selectedMarkerId]![
-                                        "location"]!,
-                                    style: TextStyle(
-                                      color:
-                                          const Color.fromARGB(255, 36, 36, 36),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color.fromARGB(255, 37, 232, 154),
-                                    Color.fromARGB(255, 42, 254, 169),
-                                    Color.fromARGB(255, 29, 213, 140),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(30),
+                                ],
                               ),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  final selectedMarkerCoords = _markerDetails[
-                                          _selectedMarkerId]!["coordinates"]
-                                      as LatLng;
-                                  _fetchRoute(
-                                      _initialPosition, selectedMarkerCoords);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors
-                                      .transparent, // Make button background transparent
-                                  shadowColor: Colors
-                                      .transparent, // Remove shadow to avoid overlay issues
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        8), // Match border radius with container
-                                  ),
-                                ),
-                                child: Text(
-                                  "Directions",
-                                  style: TextStyle(
-                                      color: Colors
-                                          .white, // Text color for better contrast
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Gilroy'),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      // Right side content (Image)
-                      Expanded(
-                        flex: 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            "assets/forgot.png",
-                            fit: BoxFit.cover,
-                            height: 120, // Adjust height to fit UI design
+                            ],
                           ),
                         ),
+                      ),
+
+                      SizedBox(height: 20),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Reload Icon Button with Gradient
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 244, 244, 244),
+                                  Color.fromARGB(255, 174, 174, 174),
+                                  Color.fromARGB(255, 117, 117, 117),
+                                ],
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Reload the description value by fetching it again
+                                _reloadBinData();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors
+                                    .transparent, // Transparent to show gradient
+                                shadowColor: Colors.transparent, // No shadow
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(
+                                    10), // Adjust padding for icon size
+                              ),
+                              child: Icon(
+                                Icons.refresh,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+
+                          // Directions Icon Button with Gradient
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 37, 232, 154),
+                                  Color.fromARGB(255, 42, 254, 169),
+                                  Color.fromARGB(255, 32, 196, 130),
+                                ],
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                final selectedMarkerCoords = _markerDetails[
+                                        _selectedMarkerId]!['coordinates']
+                                    as LatLng;
+                                _fetchRoute(
+                                    _initialPosition, selectedMarkerCoords);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors
+                                    .transparent, // Transparent to show gradient
+                                shadowColor: Colors.transparent, // No shadow
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(
+                                    10), // Adjust padding for icon size
+                              ),
+                              child: Icon(
+                                Icons.directions_run_rounded,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+
+                          // Close Icon Button with Gradient
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 255, 68, 71),
+                                  Color.fromARGB(255, 255, 102, 104),
+                                  Color.fromARGB(255, 253, 46, 50),
+                                ],
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _selectedMarkerId = null; // Close the card
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors
+                                    .transparent, // Transparent to show gradient
+                                shadowColor: Colors.transparent, // No shadow
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(
+                                    10), // Adjust padding for icon size
+                              ),
+                              child: Icon(
+                                Icons.close_rounded,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -18,7 +18,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
         "Check your email inbox",
-        style: TextStyle(fontSize: 20.0),
+        style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Gilroy',
+        ),
       )));
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
@@ -28,7 +31,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               "We don't know you!",
               style: TextStyle(
                 decoration: TextDecoration.none,
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 80, 79, 79),
+                fontFamily: 'Gilroy',
                 fontSize: 18,
               ),
             )));
@@ -39,7 +43,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               " That email might be missing a few pieces",
               style: TextStyle(
                 decoration: TextDecoration.none,
-                color: Color.fromARGB(255, 255, 255, 255),
+                fontFamily: 'Gilroy',
+                color: const Color.fromARGB(255, 255, 255, 255),
                 fontSize: 18,
               ),
             )));
@@ -50,12 +55,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/forgot.png'), fit: BoxFit.cover),
-      ),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //       image: AssetImage('assets/forgot.png'), fit: BoxFit.cover),
+      // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Stack(
           children: [
             Center(
@@ -78,7 +83,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     'Forgot your password?',
                                     style: TextStyle(
                                       fontSize: 25,
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color:
+                                          const Color.fromARGB(255, 80, 79, 79),
                                       fontFamily: 'AvantGardeLT',
                                     ),
                                   ),
@@ -98,11 +104,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   'Dont Worry!',
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
-                                      decoration: TextDecoration.none,
-                                      fontSize: 43,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: 'Gilroy',
-                                      color: Colors.white),
+                                    decoration: TextDecoration.none,
+                                    fontSize: 43,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: 'Gilroy',
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -120,13 +128,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         TextSpan(
                                           text:
                                               "We will send a Password Reset Link to\n",
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 80, 79, 79),
+                                            fontFamily: 'Gilroy',
+                                          ),
                                         ),
                                         TextSpan(
                                           text: email,
                                           style: TextStyle(
-                                              color: Color(
-                                                  0xFFffbe00)), // Change color here
+                                            color: Color.fromARGB(
+                                                255, 20, 204, 130),
+                                            fontFamily: 'Gilroy',
+                                          ), // Change color here
                                         ),
                                       ],
                                     ),
@@ -143,22 +157,32 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     return null;
                                   },
                                   controller: emailcontroller,
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
+                                    fontFamily: 'Gilroy',
+                                  ),
                                   decoration: InputDecoration(
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30),
                                         borderSide: BorderSide(
-                                          color: Colors.white,
+                                          color: const Color.fromARGB(
+                                              255, 80, 79, 79),
                                         ),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30),
                                         borderSide: BorderSide(
-                                          color: Colors.white,
+                                          color: const Color.fromARGB(
+                                              255, 80, 79, 79),
                                         ),
                                       ),
                                       hintText: "Email",
-                                      hintStyle: TextStyle(color: Colors.white),
+                                      hintStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 80, 79, 79),
+                                        fontFamily: 'Gilroy',
+                                      ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       )),
@@ -179,18 +203,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     width: 140,
                                     padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                        color:
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Color.fromARGB(255, 37, 232, 154),
                                             Color.fromARGB(255, 42, 254, 169),
+                                            Color.fromARGB(255, 29, 213, 140),
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
                                         borderRadius:
                                             BorderRadius.circular(30)),
                                     child: Center(
                                       child: Text(
                                         "Send Email",
                                         style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 31, 30, 30),
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
+                                            fontFamily: 'Gilroy',
                                             fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
@@ -208,7 +240,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                       child: Text(
                                         'Back To Login',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: const Color.fromARGB(
+                                              255, 80, 79, 79),
+                                          fontFamily: 'Gilroy',
                                           fontSize: 18,
                                         ),
                                       ),

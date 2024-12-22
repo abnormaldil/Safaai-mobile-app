@@ -31,8 +31,8 @@ class Otp extends StatelessWidget {
               fontWeight: FontWeight.bold), // Set hint color to white
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Color.fromARGB(
-                    255, 255, 255, 255)), // Set border color to white
+              color: Color.fromARGB(255, 38, 38, 38),
+            ), // Set border color to white
             borderRadius: BorderRadius.circular(30.0),
           ),
           focusedBorder: OutlineInputBorder(
@@ -80,7 +80,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 29, 28, 28),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Container(
         margin: EdgeInsets.only(left: 25, right: 25, top: 75),
         child: SingleChildScrollView(
@@ -93,7 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 'Safaai',
                 style: TextStyle(
                   fontSize: 25,
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Color.fromARGB(255, 38, 38, 38),
                   fontFamily: 'AvantGardeLT',
                 ),
               ),
@@ -131,7 +131,7 @@ class _OtpScreenState extends State<OtpScreen> {
               Text(
                 "Almost there!",
                 style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: Color.fromARGB(255, 38, 38, 38),
                     fontSize: 60.0,
                     fontWeight: FontWeight.w500,
                     fontFamily: "Gilroy"),
@@ -151,17 +151,24 @@ class _OtpScreenState extends State<OtpScreen> {
                     children: [
                       TextSpan(
                         text: "We've sent a quick verification code to\n",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 38, 38, 38),
+                          fontFamily: 'Gilroy',
+                        ),
                       ),
                       TextSpan(
                         text: widget.userEmail,
                         style: TextStyle(
-                            color: Color.fromARGB(
-                                255, 19, 212, 151)), // Change color here
+                          color: Color.fromARGB(255, 19, 212, 151),
+                          fontFamily: 'Gilroy',
+                        ), // Change color here
                       ),
                       TextSpan(
                         text: "\nEnter the code to get started.",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 38, 38, 38),
+                          fontFamily: 'Gilroy',
+                        ),
                       ),
                     ],
                   ),
@@ -206,10 +213,10 @@ class _OtpScreenState extends State<OtpScreen> {
                     child: Text(
                       "Verify",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 30, 29, 29),
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.w500,
-                      ),
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Gilroy'),
                     ),
                   ),
                 ),
@@ -222,11 +229,12 @@ class _OtpScreenState extends State<OtpScreen> {
                     Navigator.pushNamed(context, '/register');
                   },
                   child: Text(
-                    'Back to SignUp',
+                    'Back to Signup',
                     style: TextStyle(
                       decoration: TextDecoration.none,
                       color: Color.fromARGB(255, 42, 254, 169),
                       fontSize: 18,
+                      fontFamily: 'Gilory',
                     ),
                   )),
             ],

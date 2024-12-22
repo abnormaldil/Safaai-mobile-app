@@ -155,14 +155,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/register.png'), fit: BoxFit.cover),
-      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Container(
-          margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+          margin: EdgeInsets.only(left: 15, right: 15, top: 70),
           child: SingleChildScrollView(
             child: Form(
               key: _formkey,
@@ -190,7 +186,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     fontSize: 50,
                                     fontWeight: FontWeight.w900,
                                     fontFamily: 'Gilroy',
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                               ),
@@ -212,22 +209,29 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             },
                             controller: namecontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                                 hintText: "Name",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                  fontFamily: 'Gilroy',
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
@@ -243,22 +247,29 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             },
                             controller: emailcontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                                 hintText: "Email",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                  fontFamily: 'Gilroy',
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
@@ -284,22 +295,29 @@ class _RegisterPageState extends State<RegisterPage> {
                               LengthLimitingTextInputFormatter(
                                   10), // Limit input to 10 characters
                             ],
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                                 hintText: "Phone Number",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                  fontFamily: 'Gilroy',
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
@@ -315,23 +333,30 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             },
                             controller: passwordcontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             obscureText: true,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                                 hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                  fontFamily: 'Gilroy',
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
@@ -347,22 +372,29 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             },
                             controller: upicontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide: BorderSide(
-                                    color: Colors.white,
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                                 hintText: "Upi Id",
-                                hintStyle: TextStyle(color: Colors.white),
+                                hintStyle: TextStyle(
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                  fontFamily: 'Gilroy',
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 )),
@@ -388,15 +420,24 @@ class _RegisterPageState extends State<RegisterPage> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: 13.0, horizontal: 13.0),
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 42, 254, 169),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 37, 232, 154),
+                                        Color.fromARGB(255, 42, 254, 169),
+                                        Color.fromARGB(255, 29, 213, 140),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
                                     borderRadius: BorderRadius.circular(30)),
                                 child: Center(
                                     child: Text(
                                   "Sign Up",
                                   style: TextStyle(
                                       color: Colors.white,
+                                      fontFamily: 'Gilroy',
                                       fontSize: 22.0,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 ))),
                           ),
                           SizedBox(
@@ -414,9 +455,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                   'Sign In',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                      decoration: TextDecoration.none,
-                                      fontSize: 18,
-                                      color: Colors.white),
+                                    decoration: TextDecoration.none,
+                                    fontFamily: 'Gilroy',
+                                    fontSize: 18,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
+                                  ),
                                 ),
                                 style: ButtonStyle(),
                               ),

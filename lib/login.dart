@@ -111,12 +111,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/login.png'), fit: BoxFit.cover),
-      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Container(
           margin: EdgeInsets.only(left: 15, right: 15, top: 10),
           child: SingleChildScrollView(
@@ -146,7 +142,8 @@ class _LoginPageState extends State<LoginPage> {
                                     fontSize: 50,
                                     fontWeight: FontWeight.w900,
                                     fontFamily: 'Gilroy',
-                                    color: Colors.white,
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79),
                                   ),
                                 ),
                               ),
@@ -169,18 +166,22 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             controller: emailcontroller,
                             style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255)),
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             decoration: InputDecoration(
                                 fillColor: Color.fromARGB(0, 255, 255, 255),
                                 filled: true,
                                 hintText: "Email",
                                 hintStyle: TextStyle(
-                                    fontSize: 20.0,
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255)),
+                                  fontSize: 20.0,
+                                  fontFamily: 'Gilroy',
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                ),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 254, 215, 20),
+                                      color:
+                                          const Color.fromARGB(255, 80, 79, 79),
                                       width: 5.0),
                                   borderRadius: BorderRadius.circular(50),
                                 )),
@@ -197,17 +198,23 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             controller: passwordcontroller,
                             style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255)),
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                              fontFamily: 'Gilroy',
+                            ),
                             obscureText: true,
                             decoration: InputDecoration(
                                 fillColor: Color.fromARGB(0, 255, 255, 255),
                                 filled: true,
                                 hintText: "Password",
                                 hintStyle: TextStyle(
-                                    fontSize: 20.0, color: Color(0xFFFFFFFF)),
+                                  fontFamily: 'Gilroy',
+                                  fontSize: 20.0,
+                                  color: const Color.fromARGB(255, 80, 79, 79),
+                                ),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 42, 254, 169),
+                                      color:
+                                          const Color.fromARGB(255, 80, 79, 79),
                                       width: 5.0),
                                   borderRadius: BorderRadius.circular(50),
                                 )),
@@ -230,15 +237,24 @@ class _LoginPageState extends State<LoginPage> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: 13.0, horizontal: 13.0),
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 42, 254, 169),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 37, 232, 154),
+                                        Color.fromARGB(255, 42, 254, 169),
+                                        Color.fromARGB(255, 29, 213, 140),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
                                     borderRadius: BorderRadius.circular(30)),
                                 child: Center(
                                     child: Text(
                                   "Log In",
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 30, 29, 29),
+                                      fontFamily: 'Gilroy',
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                       fontSize: 22.0,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 ))),
                           ),
                           SizedBox(
@@ -255,8 +271,10 @@ class _LoginPageState extends State<LoginPage> {
                                   'Sign Up',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
+                                      fontFamily: 'Gilroy',
                                       decoration: TextDecoration.none,
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color:
+                                          const Color.fromARGB(255, 80, 79, 79),
                                       fontSize: 18),
                                 ),
                                 style: ButtonStyle(),
@@ -268,8 +286,10 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     'Forgot Password',
                                     style: TextStyle(
+                                      fontFamily: 'Gilroy',
                                       decoration: TextDecoration.none,
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color:
+                                          const Color.fromARGB(255, 80, 79, 79),
                                       fontSize: 18,
                                     ),
                                   )),
