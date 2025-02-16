@@ -86,6 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
           'PhoneNumber': int.parse(phonecontroller.text.trim()),
           'UpiId': upicontroller.text.trim(),
           'CreditBalance': 0,
+          'totalplastic': 0,
+          'totalearned' : 0,
         });
       } on FirebaseAuthException catch (e) {
         if (e.code == 'invalid-email') {

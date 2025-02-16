@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
           .signInWithEmailAndPassword(email: email, password: password);
       var assetSource = AssetSource('welcome.mp3');
       await _player.play(assetSource);
-      Navigator.pushReplacement(
+      Navigator.pop(
           context, MaterialPageRoute(builder: (context) => BottomNav()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

@@ -57,6 +57,7 @@ dependencies:
   location: 7.0.0
   dio: ^5.7.0
   syncfusion_flutter_gauges: ^20.3.56
+  lottie: ^3.3.1
   
 
 dev_dependencies:

@@ -29,44 +29,8 @@ class _HomePageState extends State<HomePage> {
   bool _isDropdownVisible = false;
   Timer? _debounce;
 
-  // Marker details map
   Map<String, Map<String, dynamic>> _markerDetails = {
-    // "SaFi-1": {
-    //   "title": "SaFi Bin 1",
-    //   "location": "CSE BLOCK RIT",
-    //   "description": 60,
-    //   "coordinates": LatLng(9.579483847276773, 76.62201380100855),
-    // },
-    // "SaFi-2": {
-    //   "title": "SaFi Bin 2",
-    //   "location": "MECH BLOCK RIT",
-    //   "description": 80,
-    //   "coordinates": LatLng(9.579802075667732, 76.62361088852967),
-    // },
-    // "SaFi-3": {
-    //   "title": "SaFi Bin 3",
-    //   "location": "EEE BLOCK RIT",
-    //   "description": 50,
-    //   "coordinates": LatLng(9.57992642403981, 76.62405676678246),
-    // },
-    // "SaFi-4": {
-    //   "title": "SaFi Bin 4",
-    //   "location": "EC BLOCK RIT",
-    //   "description": 40,
-    //   "coordinates": LatLng(9.57918255364003, 76.62417836994817),
-    // },
-    // "SaFi-5": {
-    //   "title": "SaFi Bin 5",
-    //   "location": "CIVIL BLOCK RIT",
-    //   "description": 60,
-    //   "coordinates": LatLng(9.577842048559074, 76.62287861768607),
-    // },
-    // "SaFi-6": {
-    //   "title": "SaFi Bin 6",
-    //   "location": "B-ARCH BLOCK RIT",
-    //   "description": 70,
-    //   "coordinates": LatLng(9.578541832056205, 76.62271873431126),
-    // },
+   
   };
 
   String? _selectedMarkerId;
@@ -327,9 +291,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 42, 254, 169),
+      backgroundColor: Color.fromARGB(255, 41, 41, 41),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 42, 254, 169),
+        backgroundColor: Color.fromARGB(255, 43, 43, 43),
         automaticallyImplyLeading: false,
         title: Text(
           'SaFaai',
@@ -459,13 +423,13 @@ class _HomePageState extends State<HomePage> {
           if (_selectedMarkerId != null)
             Positioned(
               bottom: 90,
-              left: 150,
-              right: 10,
+              left: 70,
+              right: 70,
               top: 450,
               child: Card(
                 color: Color.fromARGB(255, 38, 38, 38),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(60),
                 ),
                 elevation: 10,
                 child: Padding(

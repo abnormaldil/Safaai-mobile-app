@@ -45,7 +45,8 @@ class _BottomNavState extends State<BottomNav> {
           child: CurvedNavigationBar(
             height: 75,
             backgroundColor: Colors.transparent, // Transparent navbar
-            color: Color.fromARGB(255, 42, 254, 169), // Navbar's primary color
+            color:
+                const Color.fromARGB(255, 51, 50, 50), // Navbar's primary color
             animationDuration: Duration(milliseconds: 500),
             index: currentTabIndex,
             onTap: (int index) {
@@ -58,19 +59,19 @@ class _BottomNavState extends State<BottomNav> {
                 Icons.my_location,
                 color: currentTabIndex == 0
                     ? Colors.white // Active color
-                    : const Color.fromARGB(255, 23, 23, 23),
+                    : Color.fromARGB(255, 42, 254, 169),
               ),
               Icon(
                 Icons.recycling,
                 color: currentTabIndex == 1
                     ? Colors.white // Active color
-                    : const Color.fromARGB(255, 23, 23, 23),
+                    : Color.fromARGB(255, 42, 254, 169),
               ),
               Icon(
                 Icons.history_outlined,
                 color: currentTabIndex == 2
                     ? Colors.white // Active color
-                    : const Color.fromARGB(255, 23, 23, 23),
+                    : Color.fromARGB(255, 42, 254, 169),
               ),
             ],
           ),
