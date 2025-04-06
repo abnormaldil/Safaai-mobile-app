@@ -148,7 +148,7 @@ class RedeemPage extends StatelessWidget {
           child: Column(
             // mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.001),
               TweenAnimationBuilder(
                 duration: Duration(seconds: 1), // Adjust animation duration
                 tween: IntTween(
@@ -162,7 +162,7 @@ class RedeemPage extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         width: 380,
-                        height: 370,
+                        height: 340,
                         color: const Color.fromARGB(255, 36, 36, 36),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -278,13 +278,13 @@ class RedeemPage extends StatelessWidget {
                 children: [
                   // First Row - Total Deposits & Total Earnings
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // First Box - Total Deposits
                         Container(
-                          width: 180,
+                          width: 160,
                           height: 80,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 30, 30, 30),
@@ -333,11 +333,11 @@ class RedeemPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(width: 15),
+                        SizedBox(width: 20),
 
                         // Second Box - Total Earnings
                         Container(
-                          width: 180,
+                          width: 160,
                           height: 80,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 30, 30, 30),

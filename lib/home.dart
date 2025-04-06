@@ -29,9 +29,7 @@ class _HomePageState extends State<HomePage> {
   bool _isDropdownVisible = false;
   Timer? _debounce;
 
-  Map<String, Map<String, dynamic>> _markerDetails = {
-   
-  };
+  Map<String, Map<String, dynamic>> _markerDetails = {};
 
   String? _selectedMarkerId;
   Set<Polyline> _polylines = {}; // To track the selected marker
@@ -494,7 +492,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: 1),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -17,7 +17,9 @@ class Otp extends StatelessWidget {
       child: TextFormField(
         controller: otpController,
         keyboardType: TextInputType.number,
-        style: TextStyle(color: Colors.white), // Set text color to white
+        style: TextStyle(
+            color:
+                const Color.fromARGB(255, 0, 0, 0)), // Set text color to white
         textAlign: TextAlign.center,
         inputFormatters: [
           LengthLimitingTextInputFormatter(1),
